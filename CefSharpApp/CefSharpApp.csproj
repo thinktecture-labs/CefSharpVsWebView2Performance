@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="CefSharp.Wpf.NETCore" Version="112.3.0" />
+        <PackageReference Include="MaterialDesignThemes" Version="4.8.0" />
+        <PackageReference Include="MahApps.Metro" Version="2.4.9" />
+        <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.2.8" />
+    </ItemGroup>
+
+</Project>
