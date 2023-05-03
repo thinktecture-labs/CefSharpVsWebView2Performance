@@ -4,15 +4,44 @@
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
                  mc:Ignorable="d"
                  Title="CefSharp Benchmark"
                  TitleCharacterCasing="Normal"
                  WindowStartupLocation="CenterScreen"
                  Width="800"
-                 Height="450"
+                 Height="600"
                  Style="{StaticResource MaterialDesignWindow}"
                  FontFamily="{DynamicResource MahApps.Fonts.Family.Window.Title}"
                  TitleForeground="{DynamicResource MaterialDesignBody}"
                  GlowBrush="{DynamicResource PrimaryHueMidBrush}">
-    <Grid />
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="240" />
+            <RowDefinition Height="12" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <Button x:Name="SimpleCallButton"
+                Grid.Row="0"
+                Click="PerformSimpleMeasurement">
+            Measure simple call
+        </Button>
+        <Button x:Name="ComplexCallButton"
+                Grid.Row="2"
+                Click="PerformComplexMeasurement">
+            Measure complex call
+        </Button>
+        
+        <wpf:ChromiumWebBrowser x:Name="ChromiumWebBrowser"
+                                Grid.Row="4"
+                                Address="http://localhost:4200/cefSharp" />
+        
+        <ListBox x:Name="LogBox"
+                 Grid.Row="6" />
+    </Grid>
 </mah:MetroWindow>

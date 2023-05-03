@@ -8,6 +8,8 @@ public sealed partial class App
     {
         base.OnStartup(e);
         
+        ChromiumEmbedded.Initialize();
+        
         MainWindow = new MainWindow();
         MainWindow.Show();
     }
