@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Windows;
+﻿using System.Windows;
 using CefSharp;
-using Humanizer;
 
 namespace CefSharpApp;
 
@@ -14,7 +12,6 @@ public sealed partial class MainWindow
         Loaded += OnLoaded;
     }
 
-    private Stopwatch Stopwatch { get; } = new ();
     private BoundObject BoundObject { get; } = new ();
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -35,28 +32,32 @@ public sealed partial class MainWindow
     private void EnableButtons() => ChangeButtonState(true);
 
     private void ChangeButtonState(bool isEnabled) =>
-        SimpleCallButton.IsEnabled = ComplexCallButton.IsEnabled = isEnabled;
+        SimpleCallButton.IsEnabled = ComplexCallButton.IsEnabled = IntertwinedCallButton.IsEnabled = isEnabled;
 
     private async void PerformSimpleMeasurement(object _, RoutedEventArgs __)
     {
         DisableButtons();
-        Stopwatch.Restart();
-        await BoundObject.PerformSimpleCallAsync();
-        Stopwatch.Stop();
-        InsertLogItem($"Simple call took {Stopwatch.Elapsed.Humanize()}");
+        var message = await BoundObject.PerformSimpleCallAsync();
+        InsertLogItem(message);
         EnableButtons();
     }
 
     private async void PerformComplexMeasurement(object _, RoutedEventArgs __)
     {
         DisableButtons();
-        Stopwatch.Restart();
-        await BoundObject.PerformComplexCall();
-        Stopwatch.Stop();
-        InsertLogItem($"Complex call took {Stopwatch.Elapsed.Humanize()}");
+        var message = await BoundObject.PerformComplexCall();
+        InsertLogItem(message);
         EnableButtons();
     }
 
+    private async void PerformIntertwinedMeasurement(object sender, RoutedEventArgs e)
+    {
+        DisableButtons();
+        var message = await BoundObject.PerformIntertwinedCall();
+        InsertLogItem(message);
+        EnableButtons();
+    }
+    
     private void InsertLogItem(string message)
     {
         var items = LogBox.Items;

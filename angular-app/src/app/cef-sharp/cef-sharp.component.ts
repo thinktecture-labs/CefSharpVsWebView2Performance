@@ -2,13 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { SampleDto, generateSampleDtos } from '../sample-dto';
 
 interface CefSharp {
-  BindObjectAsync(name: string): Promise<any>;
+  BindObjectAsync(name: string): Promise<null>;
 }
 declare let CefSharp: CefSharp;
 
 interface BoundObject {
-  setUp(simpleCallback: () => number, complexCallback: () => SampleDto[]) : void;
-  sendTimestamp(timestamp: string): void;
+  setUp(
+    simpleCallback: () => number,
+    complexCallback: () => SampleDto[],
+    intertwinedCallback: () => Promise<void>
+  ): void;
+  passDtos(dtos: SampleDto[]): Promise<void>;
 }
 
 declare let boundObject: BoundObject;
@@ -25,14 +29,15 @@ export class CefSharpComponent implements OnInit {
     this.bindtoCefSharp();
   }
 
-  async bindtoCefSharp(): Promise<any> {
+  async bindtoCefSharp(): Promise<void> {
     if (typeof CefSharp === 'undefined')
       return;
 
     await CefSharp.BindObjectAsync(boundObjectName);
     boundObject.setUp(
       () => this.simpleCallback(),
-      () => this.complexCallback()
+      () => this.complexCallback(),
+      () => this.intertwinedCallback()
     );
   }
 
@@ -44,12 +49,8 @@ export class CefSharpComponent implements OnInit {
     return generateSampleDtos();
   }
 
-  sendTimestamp(): void {
-    if (typeof boundObject === 'undefined')
-      return;
-    
-    const utcTimestamp = new Date().toUTCString();
-    boundObject.sendTimestamp(utcTimestamp);
+  async intertwinedCallback(): Promise<void> {
+    await boundObject.passDtos(generateSampleDtos());
   }
 
 }

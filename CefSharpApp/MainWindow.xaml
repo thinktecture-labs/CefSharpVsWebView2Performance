@@ -21,6 +21,8 @@
             <RowDefinition Height="12" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="12" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="12" />
             <RowDefinition Height="240" />
             <RowDefinition Height="12" />
             <RowDefinition />
@@ -36,12 +38,17 @@
                 Click="PerformComplexMeasurement">
             Measure complex call
         </Button>
+        <Button x:Name="IntertwinedCallButton"
+                Grid.Row="4"
+                Click="PerformIntertwinedMeasurement">
+            Measure intertwined call
+        </Button>
         
         <wpf:ChromiumWebBrowser x:Name="ChromiumWebBrowser"
-                                Grid.Row="4"
+                                Grid.Row="6"
                                 Address="http://localhost:4200/cefSharp" />
         
         <ListBox x:Name="LogBox"
-                 Grid.Row="6" />
+                 Grid.Row="8" />
     </Grid>
 </mah:MetroWindow>
