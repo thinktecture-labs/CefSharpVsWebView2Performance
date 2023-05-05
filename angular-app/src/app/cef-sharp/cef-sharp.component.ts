@@ -20,8 +20,7 @@ const boundObjectName = 'boundObject';
 
 @Component({
   selector: 'app-cef-sharp',
-  templateUrl: './cef-sharp.component.html',
-  styleUrls: ['./cef-sharp.component.scss']
+  templateUrl: './cef-sharp.component.html'
 })
 export class CefSharpComponent implements OnInit {
 

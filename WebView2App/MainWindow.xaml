@@ -1,20 +1,48 @@
 ﻿<mah:MetroWindow x:Class="WebView2App.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-        mc:Ignorable="d"
-        Title="WebView2 Benchmark"
-        TitleCharacterCasing="Normal"
-        WindowStartupLocation="CenterScreen"
-        Width="800"
-        Height="450"
-        Style="{StaticResource MaterialDesignWindow}"
-        FontFamily="{DynamicResource MahApps.Fonts.Family.Window.Title}"
-        TitleForeground="{DynamicResource MaterialDesignBody}"
-        GlowBrush="{DynamicResource PrimaryHueMidBrush}">
-    <Grid>
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 xmlns:wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+                 mc:Ignorable="d"
+                 Title="WebView2 Benchmark"
+                 TitleCharacterCasing="Normal"
+                 WindowStartupLocation="CenterScreen"
+                 Width="800"
+                 Height="450"
+                 Style="{StaticResource MaterialDesignWindow}"
+                 FontFamily="{DynamicResource MahApps.Fonts.Family.Window.Title}"
+                 TitleForeground="{DynamicResource MaterialDesignBody}"
+                 GlowBrush="{DynamicResource PrimaryHueMidBrush}">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="12" />
+            <RowDefinition Height="240" />
+            <RowDefinition Height="12" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Button x:Name="SimpleCallButton"
+                Grid.Row="0"
+                Click="PerformSimpleMeasurement">
+            Measure simple call
+        </Button>
+        <Button x:Name="ComplexCallButton"
+                Grid.Row="2"
+                Click="PerformComplexMeasurement">
+            Measure complex call
+        </Button>
+        
+        <wpf:WebView2 x:Name="WebView2"
+                      Grid.Row="4"
+                      Source="http://localhost:4200/webView2" />
+        
+        <ListBox x:Name="LogBox"
+                 Grid.Row="6" />
 
     </Grid>
 </mah:MetroWindow>
